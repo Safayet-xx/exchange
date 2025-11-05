@@ -1,22 +1,31 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In | Exchange</title>
-  <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
-</head>
-<body>
-  <nav><a href="#"><img src="{% static 'accounts/logo.svg' %}" alt="logo"></a></nav>
-  <div class="form-wrapper">
-    <h2>Sign In</h2>
-    <form method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Sign In</button>
-    </form>
-    <p>New here? <a href="{% url 'accounts:signup' %}">Create account</a></p>
+{% extends "base.html" %}
+{% block title %}Sign In | Exchange{% endblock %}
+{% block content %}
+  <h2>Sign In</h2>
+
+  {% if form.non_field_errors %}
+    <ul class="errorlist">{{ form.non_field_errors }}</ul>
+  {% endif %}
+
+  <form method="post" action="{% url 'accounts:login' %}">
+    {% csrf_token %}
+    {{ form.email.errors }}
+    <p>
+      {{ form.username.label_tag }}  <!-- labelled as Email in your LoginForm -->
+      {{ form.username }}
+    </p>
+
+    {{ form.password.errors }}
+    <p>
+      {{ form.password.label_tag }}
+      {{ form.password }}
+    </p>
+
+    <p><button type="submit">Sign In</button></p>
+  </form>
+
+  <div class="links">
+    <span class="muted">New here?</span>
+    <a href="{% url 'accounts:signup' %}">Create account</a>
   </div>
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Verify Email | Exchange{% endblock %}
+{% block content %}
+  <h2>Verify your email</h2>
+  <p>We sent a code to <strong>{{ email }}</strong>.</p>
+
+  <form method="post">{% csrf_token %}
+    {{ form.code.errors }}
+    <p>
+      {{ form.code.label_tag }} {{ form.code }}
+    </p>
+    <p><button type="submit">Verify</button></p>
+  </form>
+
+  <p><a href="{% url 'accounts:resend_email_otp' %}">Resend code</a></p>
+{% endblock %}

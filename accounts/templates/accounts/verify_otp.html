@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Verify Email | Exchange{% endblock %}
+{% block content %}
+  <h2>Verify your email</h2>
+  <p class="muted">We sent a 6-digit code to <strong>{{ email }}</strong>.</p>
+
+  {% if form.non_field_errors %}
+    <ul class="errorlist">{{ form.non_field_errors }}</ul>
+  {% endif %}
+
+  <form method="post" action="{% url 'accounts:verify_otp' %}">
+    {% csrf_token %}
+    <p>
+      {{ form.code.label_tag }}
+      {{ form.code }}
+      {{ form.code.errors }}
+    </p>
+    <p><button type="submit">Verify</button></p>
+  </form>
+
+  <div class="links">
+    <a href="{% url 'accounts:resend_otp' %}">Resend code</a> ·
+    <a href="{% url 'accounts:login' %}">Back to login</a>
+  </div>
+{% endblock %}

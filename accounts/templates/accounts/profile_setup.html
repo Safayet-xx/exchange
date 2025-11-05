@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Complete your profile | Exchange{% endblock %}
+{% block content %}
+  <h2>Complete your profile</h2>
+  <p>Please fill these details to continue.</p>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <p>{{ form.full_name.label_tag }} {{ form.full_name }} {{ form.full_name.errors }}</p>
+    <p>{{ form.university.label_tag }} {{ form.university }} {{ form.university.errors }}</p>
+    <p>{{ form.course.label_tag }} {{ form.course }} {{ form.course.errors }}</p>
+    <p>{{ form.year_of_study.label_tag }} {{ form.year_of_study }} {{ form.year_of_study.errors }}</p>
+    <p>{{ form.phone.label_tag }} {{ form.phone }} {{ form.phone.errors }}</p>
+    <p>{{ form.skills.label_tag }} {{ form.skills }} {{ form.skills.errors }}</p>
+    <p>{{ form.bio.label_tag }} {{ form.bio }} {{ form.bio.errors }}</p>
+    <p>{{ form.avatar.label_tag }} {{ form.avatar }} {{ form.avatar.errors }}</p>
+    <p><button type="submit">Save & Continue</button></p>
+  </form>
+{% endblock %}

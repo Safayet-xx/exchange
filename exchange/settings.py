@@ -48,6 +48,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'accounts.middleware.ProfileCompletionMiddleware',
+
 ]
 
 ROOT_URLCONF = 'exchange.urls'
@@ -55,13 +57,14 @@ ROOT_URLCONF = 'exchange.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
@@ -123,10 +126,31 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTH_USER_MODEL = "accounts.User"   # ✅ custom user model
+AUTH_USER_MODEL = "accounts.User"
 LOGIN_URL = "accounts:login"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "accounts:login"
 
+# --- OTP/UI config (kept for your forms/validation) ---
+OTP_CODE_LENGTH = 6
+OTP_EXP_MINUTES = 10
+OTP_RESEND_COOLDOWN_S = 60
+ALLOWED_UNI_DOMAINS = {"surrey.ac.uk", "brunel.ac.uk", "imperial.ac.uk", "ucl.ac.uk"}
+
+# Dev email backend (not used by Stytch, but fine to keep)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "Exchange <no-reply@exchange.local>"
+
+# --- Stytch (TEST environment) ---
+STYTCH_PROJECT_ID = "project-test-a6dc714f-06d9-4dc8-b263-076a9b14f280"
+STYTCH_SECRET = "secret-test-IWS1hpu4MXrjRIRW5AZcDjJIeNzC_EUb--o="
+STYTCH_ENV = "test"  # "test" or "live"
+# Optional metadata (not required by SDK, fine to keep for reference)
+STYTCH_PROJECT_DOMAIN = "https://unleashed-spice-8271.customers.stytch.dev"
+STYTCH_PROJECT_ALIAS = "my-first-project-rxgn"
+STYTCH_ENV_SLUG = "test-sklm"
+STYTCH_WORKSPACE_ID = "workspace-prod-cce7a498-dc10-4127-b9bc-dccd3b237090"
+
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"

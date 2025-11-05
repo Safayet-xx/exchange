@@ -1,0 +1,14 @@
+🟢 Option 1 – Delete via Django shell (quickest)
+py manage.py shell
+
+
+Then inside the Python prompt:
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+# show all users
+User.objects.all()
+
+# delete by email
+User.objects.filter(email="mi00806@surrey.ac.uk").delete()
