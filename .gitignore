@@ -1,4 +1,80 @@
-"venv/" 
-".venv/" 
-"__pycache__/" 
-".env" 
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.log
+
+# Virtual Environments
+venv/
+.venv/
+
+# Environment & config files
+.env
+*.env
+.env.*
+
+# Django specific
+db.sqlite3
+media/
+staticfiles/
+static/
+local_settings.py
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Pytest / coverage / logs
+.coverage
+htmlcov/
+*.cover
+*.py,cover
+*.log
+*.pot
+*.mo
+*.pickle
+celerybeat-schedule
+*.db
+*.sqlite3
+
+# Compiled files
+*.so
+
+# Backup files
+*~
+*.bak
+*.tmp
+
+# Node / frontend (if any React or JS frontend)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Deployment / cache
+__pycache__/
+*.pid
+*.seed
+*.manifest
+*.spec
+
+# JetBrains / PyCharm
+.idea/
+
+# VSCode
+.vscode/
+.history/
+
+# Render / Heroku / PythonAnywhere
+.env.production
+.env.local
